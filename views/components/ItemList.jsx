@@ -78,29 +78,36 @@ class ItemList extends React.Component {
 
   renderPaused() {
     const pausedItems = this.props.pausedItems;
-    if (pausedItems !== undefined && pausedItems.length > 0) {
-      return (
-        <div>
-          <h2>Do Later</h2>
-          {
-            pausedItems && pausedItems.map((item) => {
-              return (
-                <Item
-                  item={item}
-                  text={item.text}
-                  status={item.status}
-                  key={item.key}
-                  onComplete={this.completeItem}
-                  onDelete={this.props.deleteItem}
-                  paused={true}
-                />
-              );
-            })
-          }
-        </div>
-      );
-    }
+    if (pausedItems === undefined || pausedItems.length <= 0) return null;
+
+    return (
+      <div>
+        <h2>Do Later</h2>
+        {this.renderItems(pausedItems, true, null)}
+      </div>
+    );
   }
+
+  renderItems(items, isPaused, onPause) {
+    if (!items) return null;
+
+    return items.map((item) => {
+      return (
+        <Item
+          item={item}
+          text={item.text}
+          status={item.status}
+          key={item.key}
+          onComplete={this.completeItem}
+          onDelete={this.props.deleteItem}
+          paused={isPaused}
+          onPause={onPause}
+        />
+      );
+    });
+  }
+
+  renderItems
 
   render() {
     const { pendingItems } = this.props;
@@ -115,21 +122,8 @@ class ItemList extends React.Component {
           />
           <button type="submit" />
         </form>
-        {
-          pendingItems && pendingItems.map((item) => {
-            return (
-              <Item
-                item={item}
-                text={item.text}
-                status={item.status}
-                key={item.key}
-                onComplete={this.completeItem}
-                onDelete={this.props.deleteItem}
-                onPause={this.pauseItem}
-              />
-            );
-          })
-        }
+
+        {this.renderItems(pendingItems, false, this.pauseItem)}
         {this.renderPaused()}
         {this.renderReset()}
     </div>
