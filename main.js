@@ -10,9 +10,9 @@ let willQuit = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1600,
     minWidth: 800,
-    height: 600,
+    height: 1200,
     fullscreenable: true,
     backgroundColor: '#403F4D',
     icon: path.join(__dirname, 'assets/png/128x128.png')
