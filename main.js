@@ -3,7 +3,6 @@ import { app, BrowserWindow, Menu, dialog, shell } from 'electron';
 import moment from 'moment';
 import path from 'path';
 import setupEvents from './installers/setupEvents';
-import electronDebug from 'electron-debug';
 
 let mainWindow = { show: () => { console.log('show'); } }; // temp object while app loads
 let willQuit = false;
@@ -18,7 +17,7 @@ function createWindow() {
     icon: path.join(__dirname, 'assets/png/128x128.png')
   });
   mainWindow.loadURL('file://' + __dirname + '/index.html');
-  
+
   mainWindow.webContents.openDevTools();
 }
 
