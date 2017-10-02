@@ -6,6 +6,7 @@ import { addItem, updateItem, deleteItem, resetAll } from '../actions.js';
 import { getAllItems, getPendingItems, getCompletedItems, getPausedItems } from '../reducers/item-list.js';
 import Item from './Item';
 import Progress from './Progress';
+import Zreorder from './Zreorder';
 
 class ItemList extends React.Component {
   constructor(props) {
@@ -126,6 +127,9 @@ class ItemList extends React.Component {
         {this.renderItems(pendingItems, false, this.pauseItem)}
         {this.renderPaused()}
         {this.renderReset()}
+
+        <Zreorder />
+
     </div>
     );
   }
